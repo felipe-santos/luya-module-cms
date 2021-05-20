@@ -152,7 +152,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : ['$scope', '$http', '$filter', 'ServiceMenuData', 'ServiceLanguagesData', 'AdminToastService', function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService) {
+			controller : ['$scope', '$http', '$filter', 'ServiceMenuData', 'ServiceLanguagesData', 'AdminToastService', 'ServiceCurrentWebsite', function($scope, $http, $filter, ServiceMenuData, ServiceLanguagesData, AdminToastService, ServiceCurrentWebsite) {
 
 				$scope.error = [];
 				$scope.success = false;
@@ -181,8 +181,10 @@
 				$scope.data.parent_nav_id = 0;
 				$scope.data.is_draft = 0;
 
-				$scope.data.nav_container_id = 1;
-
+				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.id;
+				});
 
 				$scope.languagesData = ServiceLanguagesData.data;
 
@@ -392,6 +394,18 @@
 
 	/* filters */
 
+	zaa.filter("menuwebsitefilter", function() {
+		return function(input, websiteId) {
+			var result = [];
+			angular.forEach(input, function(value, key) {
+				if (value.website_id == websiteId) {
+					result.push(value);
+				}
+			});
+			return result;
+		};
+	});
+
 	zaa.filter("menuparentfilter", function() {
 		return function(input, containerId, parentNavId) {
 			var result = [];
@@ -591,7 +605,7 @@
 
 	}]);
 
-	zaa.controller("CmsMenuTreeController", ['$scope', '$rootScope', '$state', '$http', '$filter', 'ServiceMenuData', 'ServiceLiveEditMode', function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode) {
+	zaa.controller("CmsMenuTreeController", ['$scope', '$rootScope', '$state', '$http', '$filter', 'ServiceMenuData', 'ServiceLiveEditMode', 'ServiceCurrentWebsite', function($scope, $rootScope, $state, $http, $filter, ServiceMenuData, ServiceLiveEditMode, ServiceCurrentWebsite) {
 
 		// live edit service
 
@@ -612,6 +626,7 @@
 		// menu Data
 
 		$scope.menuData = ServiceMenuData.data;
+		$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
 
 		$scope.$on('service:MenuData', function(event, data) {
 			$scope.menuData = data;
@@ -620,6 +635,18 @@
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
 		};
+
+		$scope.$watch('currentWebsiteToggler', function(id) {
+			ServiceCurrentWebsite.toggle(id);
+		});
+
+		$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+			if (data) {
+				$scope.currentWebsite = data;
+				$scope.currentWebsiteToggler = data.id;
+				ServiceMenuData.load();
+			}
+		});
 
 		// controller logic
 		
