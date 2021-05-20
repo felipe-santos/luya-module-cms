@@ -11,7 +11,7 @@ use luya\testsuite\scopes\PermissionScope;
 use luya\testsuite\traits\CmsDatabaseTableTrait;
 use yii\web\NotFoundHttpException;
 
-class NavControllerTeste extends WebModelTestCase
+class NavControllerTest extends WebModelTestCase
 {
     use CmsDatabaseTableTrait;
 
@@ -83,6 +83,25 @@ class NavControllerTeste extends WebModelTestCase
         PermissionScope::run($this->app, function(PermissionScope $scope) {
 
             $this->createAdminLangFixture();
+            $this->createCmsWebsiteFixture([
+                1 => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'host' => '',
+                    'aliases' => '',
+                    'is_default' => 1,
+                    'is_active' => 1,
+                    'is_deleted' => 0,
+                ]
+            ]);
+            $this->createCmsNavContainerFixture([
+                1 => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'alias' => 'default',
+                    'website_id' => 1,
+                ]
+            ]);
             $this->createCmsNavItemRedirectFixture();
             $this->createCmsNavFixture([
                 'nav1' => [
