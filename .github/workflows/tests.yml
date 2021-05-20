@@ -45,11 +45,7 @@ jobs:
       - name: Setup database
         run: |
           sudo /etc/init.d/mysql start
-<<<<<<< HEAD
           mysql -h 127.0.0.1 --port 8888 -u root -proot myapp_test < tests/data/sql/3.0.0.sql 
-=======
-          mysql -h 127.0.0.1 --port 8888 -u root myapp_test < tests/data/sql/4.0.0.sql
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05
 
       ## run unit tests
       - name: PHP Unit tests for PHP 7.0, 7.2, 7.3, 7.4, 8.0

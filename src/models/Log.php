@@ -42,7 +42,7 @@ class Log extends NgRestModel
      */
     public static function tableName()
     {
-        return '{{%cms_log}}';
+        return 'cms_log';
     }
 
     /**

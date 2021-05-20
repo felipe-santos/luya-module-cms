@@ -30,8 +30,8 @@ return [
     'view_update_settings' => 'Configurações',
     'view_update_btn_save' => 'Gravar',
     'view_update_btn_cancel' => 'Abortar',
-    'view_update_btn_hide_help' => 'Hide help',
-    'view_update_btn_show_help' => 'Show help',
+    'view_update_btn_hide_help' => 'Ocultar ajuda',
+    'view_update_btn_show_help' => 'Mostrar ajuda',
     'view_update_holder_state_on' => 'Dobrar espaços reservadors',
     'view_update_holder_state_off' => 'Desdobrar espaços reservados',
     'view_update_is_draft_mode' => 'Edição em modo rascunho.',
@@ -46,11 +46,11 @@ return [
     'menu_node_cms' => 'Conteúdo da página',
     'menu_node_cmssettings' => 'Configurações do CMS',
     'menu_group_env' => 'Environment',
-    'menu_group_item_env_container' => 'Containers',
+    'menu_group_item_env_container' => 'Recipientes',
     'menu_group_item_env_layouts' => 'Layouts',
     'menu_group_elements' => 'Elementos de conteúdo',
-    'menu_group_item_elements_blocks' => 'Gerenciamento de blocos',
-    'menu_group_item_elements_group' => 'Gerenciamento de grupos',
+    'menu_group_item_elements_blocks' => 'Blocos',
+    'menu_group_item_elements_group' => 'Grupos',
     'btn_abort' => 'Abortar',
     'btn_refresh' => 'Atualizar',
     'btn_save' => 'Gravar',
@@ -77,7 +77,7 @@ return [
     'draft_edit_button' => 'Editar',
     'js_added_translation_ok' => 'A tradução desta página foi criada com sucesso.',
     'js_added_translation_error' => 'Ocorreu um erro ao criar a tradução',
-    'js_page_add_exists' => 'Já existe uma página "% title" com o mesmo URL neste grupo (id =% id%).',
+    'js_page_add_exists' => 'Já existe uma página "%title%" com o mesmo URL neste grupo (id = %id%).',
     'js_page_property_refresh' => 'As propriedades foram atualizadas.',
     'js_page_confirm_delete' => 'Deseja mesmo excluir esta página?',
     'js_page_delete_error_cause_redirects' => 'Esta página não pode ser apagada. Primeiro, você deve excluir todos os redirecionamentos para esta página.',
@@ -90,7 +90,7 @@ return [
     'js_page_item_update_ok' => 'A página «%title%» foi atualizada!',
     'js_page_block_update_ok' => 'O bloco «%name%» foi atualizado!',
     'js_page_block_remove_ok' => 'O bloco «%name%» foi excluído!',
-    'js_page_block_visbility_change' => 'A visibilidade de «% name%» foi alterada com êxito.',
+    'js_page_block_visbility_change' => 'A visibilidade de «%name%» foi alterada com êxito.',
 
 // added translation in 1.0.0-beta4:
 
@@ -133,7 +133,7 @@ return [
     'module_permission_update_pages' => 'Editar página',
     'module_permission_edit_drafts' => 'Editar rascunho',
     'module_permission_page_blocks' => 'Blocos de conteúdo da página',
-    'js_version_delete_confirm' => 'Tem a certeza que quer excluir a versão da página «% alias%»?',
+    'js_version_delete_confirm' => 'Tem a certeza que quer excluir a versão da página «%alias%»?',
     'js_version_delete_confirm_success' => 'A versão da página %alias% foi excluída com sucesso.',
     'log_action_insert_cms_nav_item' => 'Adicionado um novo item de idioma <b>{info}</b>',
     'log_action_insert_cms_nav' => 'Adicionado nova página <b>{info}</b>',
@@ -233,7 +233,7 @@ return [
     'view_index_page_label_parent_nav_id_subpage' => 'Como uma subpagina',
     'cmsadmin_item_settings_titleseo' => 'SEO', // no translated
     'cmsadmin_item_settings_titleexpert' => 'Expert', // no translated
-    'model_navitem_is_url_strict_parsing_disabled_label' => 'Strict URL Parsing', // no translated
+    'model_navitem_is_url_strict_parsing_disabled_label' => 'Análise rigorosa de URL.', // no translated
     'model_navitem_is_url_strict_parsing_disabled_label_enabled' => 'Habilitado',
     'model_navitem_is_url_strict_parsing_disabled_label_disabled' => 'Desabilitado',
     'model_navitem_is_url_strict_parsing_disabled_label_hint' => 'Strict URL parsing deve ser ativada, a menos que você esteja usando um bloco de módulo gerador de URL no conteúdo desta página.',
@@ -249,24 +249,24 @@ return [
 
 // 3.0
 
-    'menu_group_item_env_themes' => 'Themes',
-    'view_index_page_is_cacheable' => 'Caching',
-    'view_index_page_is_cacheable_hint' => 'When enabled, the whole page will be cached including all blocks, therefore dynamically generated data in blocks will not be updated.',
+    'menu_group_item_env_themes' => 'Temas',
+    'view_index_page_is_cacheable' => 'Cache',
+    'view_index_page_is_cacheable_hint' => 'Quando ativado, a página inteira será armazenada em cache, incluindo todos os blocos, portanto, dados gerados dinamicamente em blocos não serão atualizados.',
 
 // 3.3
 
-    'menu_group_page_display' => 'Page Display',
-    'menu_group_configuration' => 'Configuration',
-    'menu_group_protocol' => 'Protocol',
-    'menu_group_protocol_model_event_logger' => 'Model Event Log',
-    'unable_to_find_item_for_language' => 'The requested page has not been translated yet.',
+    'menu_group_page_display' => 'Exibição de página',
+    'menu_group_configuration' => 'Configuração',
+    'menu_group_protocol' => 'Protocolo',
+    'menu_group_protocol_model_event_logger' => 'Log de Eventos',
+    'unable_to_find_item_for_language' => 'A página solicitada ainda não foi traduzida.',
 
     // 3.4
 
-    'js_block_attribute_empty' => '«%label%» cannot be empty.',
+    'js_block_attribute_empty' => '«%label%» não pode estar vazio.',
     
 // 4.0
 
     'menu_group_item_env_websites' => 'Websites',
-    'model_website_use_default_theme' => 'Use default theme',
+    'model_website_use_default_theme' => 'Use o tema padrão',
 ];

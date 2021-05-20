@@ -6,9 +6,6 @@
 /phpunit.xml
 /luya
 node_modules/
-<<<<<<< HEAD
 composer.lock
 .phpunit.result.cache
-=======
 tests/_output/*
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05

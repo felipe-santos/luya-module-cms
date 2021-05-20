@@ -97,7 +97,7 @@ class BlockGroup extends NgRestModel
     public function ngRestScopes()
     {
         return [
-            [['list'], ['groupLabel', 'identifier', 'created_timestamp', 'class']],
+            [['list'], ['name', 'identifier', 'created_timestamp', 'class']],
         ];
     }
     
@@ -108,8 +108,6 @@ class BlockGroup extends NgRestModel
     {
         return ['groupLabel'];
     }
-    
-
 
     /**
      * Get the Group label with translation evaled.

@@ -348,7 +348,7 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
     public function getLanguages()
     {
         if ($this->_languages === null) {
-            $this->_languages = (new DbQuery())->select(['short_code', 'id'])->indexBy('short_code')->from('admin_lang')->all();
+            $this->_languages = (new DbQuery())->select(['short_code', 'id'])->indexBy('short_code')->from('{{%admin_lang}}')->all();
         }
 
         return $this->_languages;
@@ -616,13 +616,10 @@ class Menu extends Component implements \ArrayAccess, QueryOperatorFieldInterfac
             ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.image_id', 'item.is_url_strict_parsing_disabled', 'item.alias', 'item.title_tag', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
-<<<<<<< HEAD
-            ->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
-=======
+            //->where(['nav.is_deleted' => false, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
             ->where(['nav.is_deleted' => false, 'nav_container.website_id' => $websiteId, 'item.lang_id' => $langId, 'nav.is_offline' => false, 'nav.is_draft' => false])
             ->andWhere(['or', ['publish_from' => null], ['<=', 'publish_from', time()]])
             ->andWhere(['or', ['publish_till' => null], ['>=', 'publish_till', time()]])
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05
             ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();

@@ -26,13 +26,8 @@
       "issues":"https://github.com/luyadev/luya-module-cms/issues"
    },
    "require-dev":{
-<<<<<<< HEAD
       "luyadev/luya-testsuite":"^2.0",
       "twbs/bootstrap":"^4.3.0",
-=======
-      "luyadev/luya-testsuite":"^1.0 || dev-master",
-      "twbs/bootstrap":"~4.3.0",
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05
       "unglue/client":"^1.3"
    },
    "autoload":{

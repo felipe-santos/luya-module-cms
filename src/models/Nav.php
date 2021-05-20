@@ -70,13 +70,10 @@ class Nav extends ActiveRecord
             [['nav_container_id'], 'required'],
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft', 'layout_file'], 'safe'],
             [['layout_file'], 'match', 'pattern' => '/^[a-zA-Z0-9\.\-\_]+$/'],
-<<<<<<< HEAD
             [['publish_from', 'publish_till'], 'integer'], // will be removed in 5.0
-=======
             [['parent_nav_id', 'publish_from', 'publish_till'], 'integer'],
             ['parent_nav_id', 'exist', 'targetRelation' => 'parents'],
             [['parent_nav_id'], 'default', 'value' => 0],
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05
         ];
     }
 

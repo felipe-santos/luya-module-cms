@@ -83,6 +83,6 @@ class NavContainer extends NgRestModel
     
     public function getWebsite()
     {
-        return $this->hasOne(Website::class, ['website_id' => 'id']);
+        return $this->hasOne(Website::class, ['id' => 'website_id']);
     }
 }

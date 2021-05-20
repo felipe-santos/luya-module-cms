@@ -259,16 +259,13 @@ return [
     'menu_group_protocol' => 'Protokoll',
     'menu_group_protocol_model_event_logger' => 'Model Event Log',
     'unable_to_find_item_for_language' => 'Die gesuchte Seite wurde noch nicht übersetzt.',
-<<<<<<< HEAD
 
     // 3.4
 
     'js_block_attribute_empty' => '«%label%» darf nicht leer sein.',
-=======
     
 // 4.0
 
     'menu_group_item_env_websites' => 'Websites',
     'model_website_use_default_theme' => 'Use default theme',
->>>>>>> af0dc0222405aa392f53151db1b3d95f596a9a05
 ];
