@@ -4,7 +4,6 @@ namespace luya\cms\models;
 
 use luya\admin\traits\SoftDeleteTrait;
 use luya\cms\behaviours\WebsiteScopeBehavior;
-use \luya\cms\traits\WebsiteScopeTrait;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
@@ -13,6 +12,7 @@ use luya\admin\ngrest\base\NgRestModel;
  * @property string $name
  * @property string $alias
  * @property integer $website_id
+ * @property bool $is_deleted
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -42,6 +42,7 @@ class NavContainer extends NgRestModel
     {
         return [
             [['name', 'alias', 'website_id'], 'required'],
+            [['website_id', 'is_deleted'], 'integer'],
         ];
     }
     
@@ -56,8 +57,8 @@ class NavContainer extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->delete = true;
-    
-        $config->list->field('website_id', 'Website')->text();
+        
+        $config->list->field('website_id', 'Website')->selectModel(['modelClass' => Website::class, 'valueField' => 'id', 'labelField' => 'name']);
         $config->list->field('name', 'Name')->text();
         $config->list->field('alias', 'Alias')->text();
 

@@ -3,7 +3,7 @@
 	
 	// directive.js
 
-    zaa.directive("menuDropdown", ['ServiceMenuData', '$filter', function(ServiceMenuData, $filter) {
+    zaa.directive("menuDropdown", ['ServiceMenuData', 'ServiceCurrentWebsite', '$filter', function(ServiceMenuData, ServiceCurrentWebsite, $filter) {
         return {
             restrict : 'E',
             scope : {
@@ -14,6 +14,11 @@
                 $scope.changeModel = function(data) {
                     $scope.navId = data.id;
                 }
+
+				$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
+				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+					$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
+				});
 
 				$scope.menuData = angular.copy(ServiceMenuData.data);
 				$scope.menuDataOriginal = angular.copy(ServiceMenuData.data);
@@ -78,7 +83,7 @@
 						'<div class="input-group-prepend" ng-show="searchQuery" ng-click="searchQuery = \'\'"><div class="input-group-text"><i class="material-icons">clear</i></div></div>'+
 						'<input class="form-control" ng-model="searchQuery" type="text" placeholder="'+i18n['ngrest_crud_search_text']+'">'+
 					'</div>' + 
-					'<div ng-repeat="(key, container) in menuData.containers" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
+					'<div ng-repeat="(key, container) in menuData.containers | menuwebsitefilter:currentWebsite.id" ng-if="(menuData.items | menuparentfilter:container.id:0).length > 0" class="card mb-2" ng-class="{\'card-closed\': !container.isHidden}">'+
 						'<div class="card-header" ng-click="container.isHidden=!container.isHidden">'+
 							'<span class="material-icons card-toggle-indicator">keyboard_arrow_down</span>'+
 							'<span>{{container.name}}</span>'+
@@ -182,8 +187,14 @@
 				$scope.data.is_draft = 0;
 
 				$scope.data.nav_container_id = 0; // ServiceCurrentWebsite.currentWebsite.default_container_id;
+				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+
+				$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
 				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.id;
+					if (ServiceCurrentWebsite.currentWebsite) {
+						$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite;
+						$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+					}
 				});
 
 				$scope.languagesData = ServiceLanguagesData.data;
@@ -198,12 +209,9 @@
 
 				$scope.data.lang_id = $scope.isDefaultItem.id;
 
-				$scope.navitems = [];
-
 				$scope.$watch(function() { return $scope.data.nav_container_id }, function(n, o) {
 					if (n !== undefined && n !== o) {
 						$scope.data.parent_nav_id = 0;
-						$scope.navitems = $scope.menu[n]['__items'];
 					}
 				});
 
@@ -636,16 +644,28 @@
 			return ServiceMenuData.load(true);
 		};
 
-		$scope.$watch('currentWebsiteToggler', function(id) {
-			ServiceCurrentWebsite.toggle(id);
+		// Contains the current website id, is initialized with false as value
+		$scope.currentWebsiteToggler = false
+
+		$scope.$watch('currentWebsiteToggler', function(newValue, oldValue) {
+			if (newValue && newValue !== oldValue) {
+				ServiceCurrentWebsite.toggle(newValue);
+			}
 		});
 
+		// initialize the state of the current menu service
+		$scope.currentWebsite = ServiceCurrentWebsite.currentWebsite
+
+		// if the state has recived a value, after the service event has been triggered, this ensures
+		// the current website is displayed. Like a lazy load ensurance
+		if ($scope.currentWebsite) {
+			$scope.currentWebsiteToggler = $scope.currentWebsite.id
+		}
+
 		$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
-			if (data) {
-				$scope.currentWebsite = data;
-				$scope.currentWebsiteToggler = data.id;
-				ServiceMenuData.load();
-			}
+			$scope.currentWebsite = data;
+			$scope.currentWebsiteToggler = data.id;
+			ServiceMenuData.load();
 		});
 
 		// controller logic

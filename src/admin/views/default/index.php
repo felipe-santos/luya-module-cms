@@ -94,13 +94,13 @@ use \luya\admin\Module as AdminModule;
                     </label>
                 </li>
             </ul>
-            <ul class="cmsnav-list cmsnav-list-selects" ng-show="menuData.websites.length > 1">
+            <ul class="cmsnav-list cmsnav-list-selects" ng-show="menuData.websites.length > 1 && currentWebsite && currentWebsiteToggler">
                 <li class="cmsnav-select">
-                    <zaa-select model="currentWebsiteToggler" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
+                    <zaa-select model="currentWebsiteToggler" clearable="false" options="menuData.websites" optionsvalue="id" optionslabel="name" initvalue="currentWebsite.id"/>
                 </li>
             </ul>
             <ul class="cmsnav-list cmsnav-list-treeview treeview">
-                <li class="treeview-container" ng-repeat="catitem in menuData.containers|menuwebsitefilter:currentWebsite.id" >
+                <li class="treeview-container" ng-repeat="catitem in menuData.containers | menuwebsitefilter:currentWebsite.id" >
                     <div class="treeview-label treeview-label-container" ng-click="toggleCat(catitem.id)">
                         <span class="treeview-icon treeview-icon-collapse">
                             <i class="material-icons" ng-show="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i>

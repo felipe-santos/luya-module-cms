@@ -224,6 +224,14 @@ class NavControllerTest extends WebModelTestCase
 
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavContainerFixture([
+                'container1' => [
+                    'id' => 1,
+                    'name' => 'container',
+                    'alias' => 'container',
+                    'website_id' => 1,
+                ],
+            ]);
             $this->createCmsNavFixture([
                 'nav1' => [
                     'id' => 1,
@@ -259,6 +267,14 @@ class NavControllerTest extends WebModelTestCase
 
             $this->createAdminLangFixture();
             $this->createCmsNavItemRedirectFixture();
+            $this->createCmsNavContainerFixture([
+                'container1' => [
+                    'id' => 1,
+                    'name' => 'container',
+                    'alias' => 'container',
+                    'website_id' => 1,
+                ],
+            ]);
             $this->createCmsNavFixture([
                 'nav1' => [
                     'id' => 1,
@@ -285,6 +301,103 @@ class NavControllerTest extends WebModelTestCase
             $scope->getApp()->request->setBodyParams(['navId' => 1]);
             $r = $scope->runControllerAction($ctrl, 'deep-page-copy-as-template');
             $this->assertSame(200, $scope->getApp()->response->statusCode);
+        });
+    }
+    
+    public function testActionToggleHome()
+    {
+        PermissionScope::run($this->app, function(PermissionScope $scope) {
+        
+            $this->createAdminLangFixture();
+            $this->createCmsNavItemRedirectFixture();
+            $this->createCmsWebsiteFixture([
+                1 => [
+                    'id' => 1,
+                    'name' => 'default',
+                    'host' => '',
+                    'aliases' => '',
+                    'is_default' => 1,
+                    'is_active' => 1,
+                    'is_deleted' => 0,
+                ]
+            ]);
+            $this->createCmsNavContainerFixture([
+                'container1' => [
+                    'id' => 1,
+                    'name' => 'container',
+                    'alias' => 'container',
+                    'website_id' => 1,
+                    'is_deleted' => 0,
+                ],
+            ]);
+            $this->createCmsNavFixture([
+                'nav1' => [
+                    'id' => 1,
+                    'parent_nav_id' => 0,
+                    'is_home' => 0,
+                    'nav_container_id' => 1,
+                ],
+                'nav2' => [
+                    'id' => 2,
+                    'parent_nav_id' => 0,
+                    'is_home' => 1,
+                    'nav_container_id' => 1,
+                ],
+            ]);
+            $this->createCmsNavItemFixture([
+                'item1' => [
+                    'id' => 1,
+                    'nav_id' => 1,
+                    'alias' => 'foobar',
+                    'lang_id' => 1,
+                    'nav_item_type' => 1,
+                    'nav_item_type_id' => 1,
+                ],
+                'item2' => [
+                    'id' => 2,
+                    'nav_id' => 2,
+                    'alias' => 'barfoo',
+                    'lang_id' => 1,
+                    'nav_item_type' => 1,
+                    'nav_item_type_id' => 1,
+                ]
+            ]);
+            $this->createCmsNavItemPageFixture();
+        
+            $this->createCmsPropertyFixture();
+            $this->createCmsLog();
+    
+            /** @var Nav $nav2Model */
+            $nav2Model = Nav::findOne(2);
+            $this->assertEquals(1, (int)$nav2Model->is_home);
+            
+            $scope->createAndAllowRoute('webmodel/nav/toggle-home');
+            $ctrl = new NavController('nav', $this->app);
+            
+            // toggle home from nav2 to nav1
+            $r = $scope->runControllerAction($ctrl, 'toggle-home', ['navId' => 1, 'homeState' => 1]);
+            $this->assertSame(200, $scope->getApp()->response->statusCode);
+    
+            /** @var Nav $nav1Model */
+            $nav1Model = Nav::findOne(1);
+            $this->assertEquals(1, $nav1Model->is_home);
+    
+            /** @var Nav $nav2Model */
+            $nav2Model = Nav::findOne(2);
+            $this->assertEquals(0, (int)$nav2Model->is_home);
+            
+            // untoggle nav1 as home
+            $r = $scope->runControllerAction($ctrl, 'toggle-home', ['navId' => 1, 'homeState' => 0]);
+            $this->assertSame(200, $scope->getApp()->response->statusCode);
+    
+            /** @var Nav $nav1Model */
+            $nav1Model = Nav::findOne(1);
+            $this->assertEquals(0, (int)$nav1Model->is_home);
+    
+            /** @var Nav $nav2Model */
+            $nav2Model = Nav::findOne(2);
+            $this->assertEquals(0, (int)$nav2Model->is_home);
+    
         });
     }
 

@@ -29,7 +29,7 @@ zaa.config(['resolverProvider', function(resolverProvider) {
 		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
-		ServiceMenuData.load().then(function(r) {
+		ServiceMenuData.load().then(function() {
 			ServiceCurrentWebsite.load();
 			LuyaLoading.stop();
 		});
@@ -206,7 +206,11 @@ zaa.factory("ServiceLiveEditMode", ['$rootScope', function($rootScope) {
 /**
  * CMS Current Website SERIVCE
  *
- * $scope.currentWebsiteId = ServiceCurrentWebsite.state
+ * $scope.currentWebsite = ServiceCurrentWebsite.currentWebsite 
+ * 
+ * $scope.$on('service:CurrentWebsiteChanged', function(event, data) {
+ *  	$scope.currentWebsite = data;
+ * });
  */
 zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function($rootScope, ServiceMenuData) {
 
@@ -215,13 +219,15 @@ zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function(
 		defaultWebsite: null
 	};
 
-	service.load = function(event, data) {
-		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default);
-		service.toggle(service.defaultWebsite.id);
+	service.load = function() {
+		service.defaultWebsite = ServiceMenuData.data.websites.find(w => w.is_default) || ServiceMenuData.data.websites[0];
+		if (service.defaultWebsite) {
+			service.toggle(service.defaultWebsite.id);
+		}
 	}
 
 	service.toggle = function(websiteId) {
-		if (websiteId && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
+		if (websiteId && ServiceMenuData.data.websites && (!service.currentWebsite || service.currentWebsite.id !== websiteId)) {
 			service.currentWebsite = ServiceMenuData.data.websites.find(w => w.id === websiteId);
 			$rootScope.$broadcast('service:CurrentWebsiteChanged', service.currentWebsite);
 		}
@@ -232,15 +238,12 @@ zaa.factory("ServiceCurrentWebsite", ['$rootScope', 'ServiceMenuData', function(
 
 zaa.factory("ServiceWorkingPageVersion", [function() {
 	var service = {
-		page : {}
+		page: {}
 	};
-
-
 
 	service.store = function(pageId, versionId) {
 		service.page[pageId] = versionId;
 	};
-
 
 	service.hasVersion = function(pageId) {
 		if (service.page.hasOwnProperty(pageId)) {

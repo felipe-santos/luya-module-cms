@@ -8,4 +8,4 @@
 node_modules/
 composer.lock
 .phpunit.result.cache
-tests/_output/*
+/tests/_output/*
