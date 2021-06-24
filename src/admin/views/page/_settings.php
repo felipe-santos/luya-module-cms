@@ -78,6 +78,69 @@ use luya\admin\helpers\Angular;
                     <button type="button" ng-click="navData.is_home=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_homepage_btn'); ?></button>
                 </label>
                 <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_home"><?= Module::t('view_update_is_homepage'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_header_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_header">
+                    <button type="button" ng-click="navData.is_header=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_header_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_header"><?= Module::t('view_update_is_header'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_footer_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_footer">
+                    <button type="button" ng-click="navData.is_footer=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_footer_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_footer"><?= Module::t('view_update_is_footer'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_header_panel_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_header_panel">
+                    <button type="button" ng-click="navData.is_header_panel=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_header_panel_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_header_panel"><?= Module::t('view_update_is_header_panel'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_footer_panel_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_footer_panel">
+                    <button type="button" ng-click="navData.is_footer_panel=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_footer_panel_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_footer_panel"><?= Module::t('view_update_is_footer_panel'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_menu_panel_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_menu_panel">
+                    <button type="button" ng-click="navData.is_menu_panel=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_menu_panel_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_menu_panel"><?= Module::t('view_update_is_menu_panel'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_banner_mini_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_banner_mini">
+                    <button type="button" ng-click="navData.is_banner_mini=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_banner_mini_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_banner_mini"><?= Module::t('view_update_is_banner_mini'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_banner_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_banner">
+                    <button type="button" ng-click="navData.is_banner=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_banner_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_banner"><?= Module::t('view_update_is_banner'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_popup_login_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_popup_login">
+                    <button type="button" ng-click="navData.is_popup_login=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_popup_login_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_popup_login"><?= Module::t('view_update_is_popup_login'); ?></button>
+                <hr />
+                <p><?= Module::t('view_update_popup_info'); ?></p>
+                <!-- OLD CODE -->
+                <label ng-if="!navData.is_popup">
+                    <button type="button" ng-click="navData.is_popup=1" class="btn btn-save btn-icon"><?= Module::t('view_update_set_as_popup_btn'); ?></button>
+                </label>
+                <button type="button" class="btn btn-success btn-disabled" disabled ng-if="navData.is_popup"><?= Module::t('view_update_is_popup'); ?></button>
             </div>
             <?php if (Yii::$app->adminuser->canRoute(Module::ROUTE_PAGE_DELETE)): ?>
             <div ng-switch-when="6">

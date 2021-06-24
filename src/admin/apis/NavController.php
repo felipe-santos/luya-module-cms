@@ -255,6 +255,232 @@ class NavController extends \luya\admin\base\RestController
         return $item->update(false);
     }
 
+    
+    public function actionToggleHeader($navId, $headerState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($headerState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_header' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_header' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_header' => false,
+            ]);
+        }
+        
+        return $item->update(false);
+    }
+
+    public function actionToggleFooter($navId, $footerState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($footerState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_footer' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_footer' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_footer' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
+    public function actionToggleMenuPanel($navId, $menuState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($menuState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_menu_panel' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_menu_panel' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_menu_panel' => false,
+            ]);
+        }
+        
+        return $item->update(false);
+    }
+
+    public function actionToggleHeaderPanel($navId, $headerState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($headerState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_header_panel' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_header_panel' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_header_panel' => false,
+            ]);
+        }
+        
+        return $item->update(false);
+    }
+
+    public function actionToggleFooterPanel($navId, $footerState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($footerState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_footer_panel' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_footer_panel' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_footer_panel' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
+    public function actionToggleBanner($navId, $bannerState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($bannerState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_banner' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_banner' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_banner' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
+    public function actionToggleBannerMini($navId, $bannerMiniState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($bannerMiniState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_banner_mini' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_banner_mini' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_banner_mini' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
+    public function actionTogglePopupLogin($navId, $popupState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($popupState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_popup_login' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_popup_login' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_popup_login' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
+    public function actionTogglePopup($navId, $popupState)
+    {
+        $item = Nav::find()->where(['cms_nav.id' => $navId])->one();
+        $navContainer = NavContainer::find()->where(['id' => $item->nav_container_id])->one();
+        $this->menuFlush();
+        if ($popupState == 1) {
+            $navIds = (new Query())
+                ->from(Nav::tableName())
+                ->leftJoin(NavContainer::tableName(), 'cms_nav_container.id = nav_container_id')
+                ->where(['website_id' => $navContainer->website_id])
+                ->select('cms_nav.id')
+                ->column();
+            Nav::updateAll(['is_popup' => false], ['id' => $navIds]);
+            $item->setAttributes([
+                'is_popup' => true,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_popup' => false,
+            ]);
+        }
+
+        return $item->update(false);
+    }
+
     public function actionToggleOffline($navId, $offlineStatus)
     {
         $item = Nav::find()->where(['id' => $navId])->one();

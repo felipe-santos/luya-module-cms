@@ -190,31 +190,42 @@ abstract class Controller extends \luya\web\Controller
                 $this->view->title = $model->title_tag;
             }
         }
+        if($model->nav->is_header || 
+            $model->nav->is_footer || 
+            $model->nav->is_header_panel || 
+            $model->nav->is_footer_panel || 
+            $model->nav->is_menu_panel || 
+            $model->nav->is_banner || 
+            $model->nav->is_banner_mini || 
+            $model->nav->is_popup_login || 
+            $model->nav->is_popup
+            ){
+        }else{
+            $this->view->registerMetaTag(['property' => 'og:type', 'content' => 'website'], self::META_OG_TYPE);
+            $this->view->registerMetaTag(['name' => 'twitter:card', 'content' => 'summary'], self::META_TWITTER_CARD);
+            
+            $this->view->registerMetaTag(['property' => 'og:title', 'content' => $this->view->title], self::META_OG_TITLE);
+            $this->view->registerMetaTag(['name' => 'twitter:title', 'content' => $this->view->title], self::META_TWITTER_TITLE);
+            
+            $this->view->registerMetaTag(['property' => 'og:url', 'content' => Yii::$app->request->absoluteUrl], self::META_OG_URL);
+            $this->view->registerMetaTag(['name' => 'twitter:url', 'content' => Yii::$app->request->absoluteUrl], self::META_TWITTER_URL);
 
-        $this->view->registerMetaTag(['property' => 'og:type', 'content' => 'website'], self::META_OG_TYPE);
-        $this->view->registerMetaTag(['name' => 'twitter:card', 'content' => 'summary'], self::META_TWITTER_CARD);
-        
-        $this->view->registerMetaTag(['property' => 'og:title', 'content' => $this->view->title], self::META_OG_TITLE);
-        $this->view->registerMetaTag(['name' => 'twitter:title', 'content' => $this->view->title], self::META_TWITTER_TITLE);
-        
-        $this->view->registerMetaTag(['property' => 'og:url', 'content' => Yii::$app->request->absoluteUrl], self::META_OG_URL);
-        $this->view->registerMetaTag(['name' => 'twitter:url', 'content' => Yii::$app->request->absoluteUrl], self::META_TWITTER_URL);
+            if (!empty($model->description)) {
+                $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], self::META_DESCRIPTION);
+                $this->view->registerMetaTag(['property' => 'og:description', 'content' => $model->description], self::META_OG_DESCRIPTION);
+                $this->view->registerMetaTag(['name' => 'twitter:description', 'content' => $model->description], self::META_TWITTER_DESCRIPTION);
+            }
+            
+            if (!empty($model->keywords)) {
+                $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], self::META_KEYWORDS);
+            }
 
-        if (!empty($model->description)) {
-            $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], self::META_DESCRIPTION);
-            $this->view->registerMetaTag(['property' => 'og:description', 'content' => $model->description], self::META_OG_DESCRIPTION);
-            $this->view->registerMetaTag(['name' => 'twitter:description', 'content' => $model->description], self::META_TWITTER_DESCRIPTION);
-        }
-        
-        if (!empty($model->keywords)) {
-            $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], self::META_KEYWORDS);
-        }
-
-        if (!empty($model->image_id)) {
-            $image = Yii::$app->storage->getImage($model->image_id);
-            if ($image) {
-                $this->view->registerMetaTag(['property' => 'og:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_OG_IMAGE);
-                $this->view->registerMetaTag(['name' => 'twitter:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_TWITTER_IMAGE);
+            if (!empty($model->image_id)) {
+                $image = Yii::$app->storage->getImage($model->image_id);
+                if ($image) {
+                    $this->view->registerMetaTag(['property' => 'og:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_OG_IMAGE);
+                    $this->view->registerMetaTag(['name' => 'twitter:image', 'content' => $image->applyFilter(LargeThumbnail::identifier())->sourceAbsolute], self::META_TWITTER_IMAGE);
+                }
             }
         }
         

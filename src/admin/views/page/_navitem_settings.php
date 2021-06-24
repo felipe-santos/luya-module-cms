@@ -35,6 +35,14 @@ use luya\admin\helpers\Angular;
                 <?= Angular::text('itemCopy.title', Module::t('view_index_page_title')); ?>
                 <?= Angular::text('itemCopy.alias', Module::t('view_index_page_alias')); ?>
                 <?= Angular::checkbox('itemCopy.is_cacheable', Module::t('view_index_page_is_cacheable'))->hint(Module::t('view_index_page_is_cacheable_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_header', Module::t('view_index_page_has_header'))->hint(Module::t('view_index_page_has_header_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_footer', Module::t('view_index_page_has_footer'))->hint(Module::t('view_index_page_has_footer_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_header_panel', Module::t('view_index_page_has_header_panel'))->hint(Module::t('view_index_page_has_header_panel_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_footer_panel', Module::t('view_index_page_has_footer_panel'))->hint(Module::t('view_index_page_has_footer_panel_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_menu_panel', Module::t('view_index_page_has_menu_panel'))->hint(Module::t('view_index_page_has_menu_panel_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_banner', Module::t('view_index_page_has_banner'))->hint(Module::t('view_index_page_has_banner_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_banner_mini', Module::t('view_index_page_has_banner_mini'))->hint(Module::t('view_index_page_has_banner_mini_hint')); ?>
+                <?= Angular::checkbox('itemCopy.has_popup', Module::t('view_index_page_has_popup'))->hint(Module::t('view_index_page_has_popup_hint')); ?>
                 <?= Angular::datetime('itemCopy.timestamp_create', Module::t('view_index_page_meta_timestamp_create'), ['resetable' => false]); ?>
                 <?= Angular::radio('itemCopy.nav_item_type', Module::t('view_index_add_type'), [
                     1 => Module::t('view_index_type_page'),

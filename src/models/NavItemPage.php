@@ -499,6 +499,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'block_class' => $className,
             'block_class_name' => $shortName,
             'is_hidden' => $blockItem['is_hidden'],
+            'is_minimized' => $blockItem['is_minimized'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
             'full_name' => ($blockObject->icon() === null) ? $blockObject->name() : '<i class="material-icons">'.$blockObject->icon().'</i> <span>'.$blockObject->name().'</span>',

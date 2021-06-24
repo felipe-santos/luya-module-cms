@@ -306,6 +306,14 @@ class NavItemController extends \luya\admin\base\RestController
         $model->timestamp_create = Yii::$app->request->post('timestamp_create');
         $model->is_url_strict_parsing_disabled = Yii::$app->request->post('is_url_strict_parsing_disabled');
         $model->is_cacheable = Yii::$app->request->post('is_cacheable');
+        $model->has_header = Yii::$app->request->post('has_header');
+        $model->has_footer = Yii::$app->request->post('has_footer');
+        $model->has_header_panel = Yii::$app->request->post('has_header_panel');
+        $model->has_footer_panel = Yii::$app->request->post('has_footer_panel');
+        $model->has_menu_panel = Yii::$app->request->post('has_menu_panel');
+        $model->has_banner = Yii::$app->request->post('has_banner');
+        $model->has_banner_mini = Yii::$app->request->post('has_banner_mini');
+        $model->has_popup = Yii::$app->request->post('has_popup');
 
         // make sure the currently provided informations are valid (like title);
         if (!$model->validate()) {
@@ -512,6 +520,24 @@ class NavItemController extends \luya\admin\base\RestController
         return false;
     }
 
+    /**
+     * Toggle visibilty of a block.
+     *
+     * @param integer $blockId
+     * @param integer $hiddenState
+     * @return array
+     */
+    public function actionToggleBlockMinimize($blockId, $minimizedState)
+    {
+        $block = NavItemPageBlockItem::findOne($blockId);
+        if ($block) {
+            $block->is_minimized = $minimizedState;
+            return $block->update(false);
+        }
+        
+        return false;
+    }
+    
     /**
      * Get full constructed path of a nav item.
      *

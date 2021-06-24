@@ -50,7 +50,7 @@ class BlockPagesActiveWindow extends ActiveWindow
     {
         return $this->render('index', [
             'blocks' => $this->model->getNavItemPageBlockItems()
-                ->select(['nav_item_page_id', 'is_hidden', 'title'])
+                ->select(['nav_item_page_id', 'is_hidden', 'is_minimized', 'title'])
                 ->with(['navItemPage.forceNavItem.lang', 'navItemPage.forceNavItem.nav'])
                 ->joinWith(['navItemPage.forceNavItem'])
                 ->distinct()

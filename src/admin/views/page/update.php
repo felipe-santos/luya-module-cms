@@ -33,7 +33,7 @@ use luya\cms\helpers\Url;
                     model-class="luya\cms\models\Nav"
                     attribute-name="is_hidden"
                     title="Visibility"
-                    attribute-values='[{"label":"Hidden","value":1},{"label":"Visible","value":0}]'></luya-schedule>
+                    attribute-values='[{"label":"Hidden","value":0},{"label":"Visible","value":1}]'></luya-schedule>
                 </div>
                 <div ng-show="!isDraft" class="toolbar-item">
                     <label class="switch" for="switch-online-status" tooltip tooltip-text="<?= Module::t('view_update_offline_info')?>" tooltip-position="bottom">
@@ -55,7 +55,7 @@ use luya\cms\helpers\Url;
                     model-class="luya\cms\models\Nav"
                     attribute-name="is_offline"
                     title="Status"
-                    attribute-values='[{"label":"Offline","value":1},{"label":"Online","value":0}]'></luya-schedule>
+                    attribute-values='[{"label":"Offline","value":0},{"label":"Online","value":1}]'></luya-schedule>
                 </div>
                 <div class="toolbar-item toolbar-item-lang" ng-class="{'ml-auto':$first}" ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-if="AdminLangService.data.length > 1">
                     <button class="btn-toolbar flag-btn" ng-class="{'active' : AdminLangService.isInSelection(lang.short_code)}" >
@@ -67,7 +67,7 @@ use luya\cms\helpers\Url;
                 <div class="toolbar-item" ng-class="{'ml-auto': AdminLangService.data.length <= 1}">
                     <div class="dropdown" ng-class="{'show': toggleSettings}"  ng-click="toggleSettings=!toggleSettings">
                         <button type="button" class="btn btn-outline-config btn-icon" ng-class="{'btn-active': toggleSettings}"></button>
-                        <div class="dropdown-menu dropdown-menu-right" ng-class="{'show': toggleSettings}">
+                        <div class="dropdown-menu dropdown-menu-left" ng-class="{'show': toggleSettings}">
                             <a class="dropdown-item" ng-click="togglePageSettingsOverlay(9)">
                                 <i class="material-icons">tag</i> <span><?= AdminModule::t('menu_system_item_tags'); ?></span>
                             </a>    
@@ -107,7 +107,7 @@ use luya\cms\helpers\Url;
             </div>
         </div>
         <?php if ($canBlockCreate): ?>
-        <div class="col blockholder-column" ng-controller="DroppableBlocksController" ng-class="{'blockholder-column-small' : !isBlockholderSmall}" }>
+        <div class="col2 blockholder-column" ng-controller="DroppableBlocksController" ng-class="{'blockholder-column-small' : !isBlockholderSmall}" }>
             <div class="blockholder">
                 <div class="blockholder-search">
                     <input class="blockholder-search-input" id="blockholder-search" ng-model="searchQuery" />
@@ -170,3 +170,10 @@ use luya\cms\helpers\Url;
         <?php endif; ?>
     </div>
 </div>
+
+<style>
+.dropdown-menu-left {
+    right: 0 !important;
+    left: auto !important;
+}
+</style>

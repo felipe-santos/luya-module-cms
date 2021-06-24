@@ -181,7 +181,7 @@
 				$scope.data.parent_nav_id = 0;
 				$scope.data.is_draft = 0;
 
-				$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+				$scope.data.nav_container_id = 0; // ServiceCurrentWebsite.currentWebsite.default_container_id;
 				$scope.$on('service:CurrentWebsiteChanged', function(event, data) {
 					$scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.id;
 				});
@@ -1566,6 +1566,25 @@
 		
 		$scope.copyBlock = function() {
 			ServiceBlockCopyStack.push($scope.block);
+		};
+
+		$scope.minimizeBlock = function() {
+			if ($scope.block.is_minimized != 1) {
+				$scope.block.is_minimized = 1;
+			} else {
+				$scope.block.is_minimized = 0;
+			}
+
+			$http({
+			    url: 'admin/api-cms-navitem/toggle-block-minimize',
+			    method: "GET",
+			    params: { blockId : $scope.block.id, minimizedState: $scope.block.is_minimized }
+			}).then(function(response) {
+				/* load live url on hidden trigger */
+				$scope.NavItemTypePageController.$parent.$parent.loadLiveUrl();
+				// successfull toggle hidden state of block
+				AdminToastService.info(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}));
+			});
 		};
 
 		$scope.toggleHidden = function() {

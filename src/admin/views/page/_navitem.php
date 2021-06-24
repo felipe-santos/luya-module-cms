@@ -20,6 +20,16 @@ use luya\helpers\Html;
                             <i class="material-icons">content_copy</i>
                         </button>
                     </div>
+                    <div class="toolbar-item" ng-click="minimizeBlock()" ng-show="block.is_minimized==0">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_copy'));?>" tooltip-position="top">
+                            <i class="material-icons">indeterminate_check_box</i>
+                        </button>
+                    </div>
+                    <div class="toolbar-item" ng-click="minimizeBlock()" ng-show="block.is_minimized==1">
+                        <button class="block-toolbar-button" tooltip tooltip-text="<?= Html::encode(Module::t('view_update_block_tooltip_copy'));?>" tooltip-position="top">
+                            <i class="material-icons">add_box</i>
+                        </button>
+                    </div>
 					<?php if ($canBlockUpdate): ?>
                     <div class="toolbar-item">
                         <luya-schedule
@@ -112,7 +122,7 @@ use luya\helpers\Html;
                     </div>
                 </modal>
                 <div ng-if="!block.is_container" ng-click="toggleEdit()" class="block-front" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-                <div ng-if="block.__placeholders.length" class="block-front">
+                <div ng-if="block.__placeholders.length" class="block-front" ng-class="{ 'block-is-minimized': block.is_minimized == 1 }">
                     <div class="row" ng-repeat="(inlineRowKey, row) in block.__placeholders">
                         <div class="col-xl-{{placeholder.cols}}" ng-repeat="(placeholderInlineKey, placeholder) in row track by placeholderInlineKey" ng-include="'recursion.html'"></div>
                     </div>

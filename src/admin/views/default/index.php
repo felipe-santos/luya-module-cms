@@ -13,6 +13,33 @@ use \luya\admin\Module as AdminModule;
         <span class="treeview-icon treeview-icon-right" ng-if="data.is_home==1">
             <i class="material-icons">home</i>
         </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_header==1">
+            <i class="material-icons">border_top</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_footer==1">
+            <i class="material-icons">border_bottom</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_header_panel==1">
+            <i class="material-icons">border_top</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_footer_panel==1">
+            <i class="material-icons">border_bottom</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_menu_panel==1">
+            <i class="material-icons">menu_open</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_banner==1">
+            <i class="material-icons">image</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_banner_mini==1">
+            <i class="material-icons">image</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_popup_login==1">
+            <i class="material-icons">important_devices</i>
+        </span>
+        <span class="treeview-icon treeview-icon-right" ng-if="data.is_popup==1">
+            <i class="material-icons">important_devices</i>
+        </span>
         <span class="treeview-icon treeview-icon-right" ng-if="isLocked('cms_nav_item', data.id)" tooltip tooltip-text="<?= AdminModule::t('locked_info'); ?> ({{getLockedName('cms_nav_item', data.id)}})">
             <i class="material-icons">warning</i>
         </span>
@@ -120,3 +147,13 @@ use \luya\admin\Module as AdminModule;
         </div>
     </div>
 </div>
+<style>
+.card-body { padding: 5px; }
+.cmsadmin-container-title { margin-top: 0px; margin-bottom: 0px; }
+.block-edit, .block-front { padding: 5px; }
+.table th, .table td { padding: 2px !important; }
+.block-is-minimized { display: none; }
+.treeview-item>.treeview-label { font-weight: bold; }
+.treeview-item-ishidden>.treeview-label { opacity: 0.8 !important; color: blue; font-weight: 200; }
+.treeview-item-isoffline>.treeview-label { opacity: 0.6 !important; color: red; font-weight: 100; }
+</style>
