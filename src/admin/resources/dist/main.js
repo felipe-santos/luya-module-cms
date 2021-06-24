@@ -157,12 +157,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         $scope.data.nav_item_type = 1;
         $scope.data.parent_nav_id = 0;
         $scope.data.is_draft = 0;
-        $scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
-        $scope.$on('service:CurrentWebsiteChanged', function (event, data) {
-          if (ServiceCurrentWebsite.currentWebsite) {
-            $scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
-          }
-        });
+        if(ServiceCurrentWebsite.currentWebsite.default_container_id !== undefined){
+          $scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+          $scope.$on('service:CurrentWebsiteChanged', function (event, data) {
+            if (ServiceCurrentWebsite.currentWebsite) {
+              $scope.data.nav_container_id = ServiceCurrentWebsite.currentWebsite.default_container_id;
+            }
+          });
+        }
         $scope.languagesData = ServiceLanguagesData.data;
         $scope.$on('service:LanguagesData', function (event, data) {
           $scope.languagesData = data;
