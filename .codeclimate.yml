@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 exclude_patterns:
   - "src/frontend/messages/**/*.php"
   - "src/admin/messages/**/*.php"
   - "src/admin/migrations/*.php"
+=======
+exclude_patterns:
+  - "src/frontend/messages/**/*.php"
+  - "src/admin/messages/**/*.php"
+  - "src/admin/migrations/*.php"
+  - "src/admin/views/"
+>>>>>>> luyadev-master
